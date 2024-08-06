@@ -25,8 +25,8 @@ class Generator(nn.Module):
         )
 
         self.upsample_block = nn.Sequential(
-            UpsampleBlock(64,256,3,1),
-            UpsampleBlock(256,256,3,1)
+            UpsampleBlock(64,256,3,1,2),
+            UpsampleBlock(256,256,3,1,2)
         )
 
         self.output_block = nn.Conv2d(256,3,9,1)
