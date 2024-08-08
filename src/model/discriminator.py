@@ -27,9 +27,9 @@ class Discriminator(nn.Module):
             nn.Linear(in_features=1024,out_features=1),
         )
 
-        def forward(self,x):
-            x = self.block_0(x)
-            x = self.block_1(x)
-            x = self.block_2(x)
+    def forward(self,x):
+        x = self.block_0(x)
+        x = self.block_1(x)
+        x = self.block_2(x)
 
-            return x
+        return x
