@@ -22,7 +22,8 @@ class Discriminator(nn.Module):
         )
 
         self.block_2 = nn.Sequential(
-            nn.Linear(in_features=512,out_features=1024),
+            nn.AdaptiveAvgPool2d((6,6)),
+            nn.Linear(in_features=512*6*6,out_features=1024),
             nn.LeakyReLU(),
             nn.Linear(in_features=1024,out_features=1),
         )

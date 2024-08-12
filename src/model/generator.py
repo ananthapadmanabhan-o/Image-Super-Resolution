@@ -5,7 +5,7 @@ from math import log2
     
     
 class Generator(nn.Module): 
-    def __init__(self,scale_factor=2):
+    def __init__(self,scale_factor=4):
         super().__init__()
         num_upsample_block = int(log2(scale_factor))
 

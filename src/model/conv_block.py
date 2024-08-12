@@ -20,7 +20,7 @@ class ConvBlock(nn.Module):
             nn.BatchNorm2d(
                 num_features=out_channel
             ),
-            nn.LeakyReLU()
+            nn.LeakyReLU(0.2)
         )
 
     def forward(self,x):
