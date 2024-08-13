@@ -13,9 +13,11 @@ class Div2kDataset(Dataset):
     
     def __getitem__(self, index):
 
-        hr_img = cv2.imread(self.images[index],1)
+        img_file_path = os.path.join(self.root_dir,self.images[index])
+
+        hr_img = cv2.imread(img_file_path,1)
         hr_img = cv2.cvtColor(hr_img,cv2.COLOR_BGR2RGB)
-        img_h, img_w, _ = hr_img.size
+        img_h, img_w, _ = hr_img.shape
 
         crop_h = (img_h//self.downscale)*self.downscale
         crop_w = (img_w//self.downscale)*self.downscale
