@@ -1,5 +1,5 @@
 import torch
-from data import Div2kDataset
+from dataset import Div2kDataset
 from model import Generator, Discriminator
 from losses import GenLoss, DiscLoss 
 from torch.optim import Adam 
