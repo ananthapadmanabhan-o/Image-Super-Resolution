@@ -1,13 +1,22 @@
-from torch import nn
+import torch
 from model import Generator, Discriminator
+from losses import GenLoss, DiscLoss 
 from torch.optim import Adam 
 
 
-gen = Generator()
-disc = Discriminator()
+
+device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
 lr = 0.0001
+num_epochs = 1
+
+
+gen = Generator().to(device)
+disc = Discriminator().to(device)
 
 gen_optim = Adam(gen.parameters(),lr=lr)
 disc_optim = Adam(disc.parameters(),lr=lr)
+
+genloss = GenLoss()
+discloss = DiscLoss()
 
