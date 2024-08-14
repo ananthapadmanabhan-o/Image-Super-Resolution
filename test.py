@@ -13,6 +13,10 @@ from torch.optim import Adam
 
 from tqdm import tqdm
 
+# torch.autograd.set_detect_anomaly(True)
+
+
+
 # Mean: tensor([0.4112, 0.4435, 0.4562])
 # Std: tensor([0.1613, 0.1644, 0.1737])
 
@@ -30,13 +34,13 @@ dataset = Div2kDataset(
 )
 
 
-dataloader = DataLoader(dataset,batch_size=5,num_workers=4)
+dataloader = DataLoader(dataset,batch_size=1,num_workers=2)
 
 
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
-lr = 0.0001
+lr = 0.001
 num_epochs = 1
 
 
@@ -73,7 +77,7 @@ for epoch in range(1,num_epochs+1):
 
         d_loss = discriminator_loss(disc_real_out,disc_generated_out,real_label,generated_label)
 
-        d_loss.backward()
+        d_loss.backward(retain_graph=True)
         discriminator_optim.step()
 
 
@@ -81,7 +85,7 @@ for epoch in range(1,num_epochs+1):
 
         generator_optim.zero_grad()
 
-        g_loss = generator_loss(generated_hr_img,hr_img,real_label)
+        g_loss = generator_loss(generated_hr_img,hr_img,disc_generated_out,real_label)
         g_loss.backward()
 
         generator_optim.step()

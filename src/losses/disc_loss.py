@@ -3,7 +3,7 @@ from torch import nn
 class DiscLoss(nn.Module):
     def __init__(self,):
         super().__init__()
-        self.bce = nn.BCEWithLogitsLoss()
+        self.bce = nn.BCELoss()
 
     def forward(self,real_disc_ouput,genereated_disc_output,real_label,generated_label):
 

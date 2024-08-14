@@ -22,10 +22,11 @@ class Discriminator(nn.Module):
         )
 
         self.block_2 = nn.Sequential(
-            nn.AdaptiveAvgPool2d(1),
-            nn.Conv2d(512, 1024, kernel_size=1),
-            nn.LeakyReLU(0.2),
-            nn.Conv2d(1024, 1, kernel_size=1)
+            nn.AdaptiveAvgPool2d((8,8)),
+            nn.Flatten(),
+            nn.Linear(512*8*8,1024),
+            nn.LeakyReLU(0.2,inplace=True),
+            nn.Linear(1024,1)
         )
 
     def forward(self,x):
