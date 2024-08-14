@@ -1,5 +1,5 @@
 from torch import nn 
-from conv_block import ConvBlock
+from .conv_block import ConvBlock
 
 class Discriminator(nn.Module):
     ''' Class for the Discriminator '''
@@ -22,10 +22,10 @@ class Discriminator(nn.Module):
         )
 
         self.block_2 = nn.Sequential(
-            nn.AdaptiveAvgPool2d((6,6)),
-            nn.Linear(in_features=512*6*6,out_features=1024),
-            nn.LeakyReLU(),
-            nn.Linear(in_features=1024,out_features=1),
+            nn.AdaptiveAvgPool2d(1),
+            nn.Conv2d(512, 1024, kernel_size=1),
+            nn.LeakyReLU(0.2),
+            nn.Conv2d(1024, 1, kernel_size=1)
         )
 
     def forward(self,x):
