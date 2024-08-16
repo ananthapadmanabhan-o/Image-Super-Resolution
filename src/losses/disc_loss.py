@@ -5,10 +5,10 @@ class DiscLoss(nn.Module):
         super().__init__()
         self.bce = nn.BCELoss()
 
-    def forward(self,real_disc_ouput,genereated_disc_output,real_label,generated_label):
+    def forward(self,disc_output_real,disc_ouput_generated,real_label,generated_label):
 
-        original_loss = self.bce(real_disc_ouput,real_label)
-        generated_loss = self.bce(genereated_disc_output,generated_label)
+        real_loss = self.bce(disc_output_real,real_label)
+        generated_loss = self.bce(disc_ouput_generated,generated_label)
 
-        total_loss = 0.5*(original_loss+generated_loss)
+        total_loss = 0.5*(real_loss+generated_loss)
         return total_loss

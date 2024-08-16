@@ -7,7 +7,7 @@ class Discriminator(nn.Module):
     def __init__(self):
         super().__init__()
         self.block_0 = nn.Sequential(
-            nn.Conv2d(3,64,3,1),
+            nn.Conv2d(3,64,3,1,1),
             nn.LeakyReLU()
         )
 
@@ -22,10 +22,10 @@ class Discriminator(nn.Module):
         )
 
         self.block_2 = nn.Sequential(
-            nn.AdaptiveAvgPool2d((8,8)),
+            nn.AdaptiveAvgPool2d(4),
             nn.Flatten(),
-            nn.Linear(512*8*8,1024),
-            nn.LeakyReLU(0.2,inplace=True),
+            nn.Linear(512*4*4,1024),
+            nn.LeakyReLU(0.2),
             nn.Linear(1024,1)
         )
 

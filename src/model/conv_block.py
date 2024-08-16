@@ -7,7 +7,8 @@ class ConvBlock(nn.Module):
             in_channel=3,
             out_channel=3,
             kernel=3,
-            stride=2
+            stride=1,
+            padding=1
         ):
         super().__init__()
         self.block = nn.Sequential(
@@ -15,7 +16,8 @@ class ConvBlock(nn.Module):
                 in_channels=in_channel,
                 out_channels=out_channel,
                 kernel_size=kernel,
-                stride=stride
+                stride=stride,
+                padding=padding
             ),
             nn.BatchNorm2d(
                 num_features=out_channel

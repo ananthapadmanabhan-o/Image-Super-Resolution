@@ -34,7 +34,7 @@ dataset = Div2kDataset(
 )
 
 
-dataloader = DataLoader(dataset,batch_size=1,num_workers=2)
+dataloader = DataLoader(dataset,batch_size=1,num_workers=2,shuffle=True)
 
 
 
@@ -50,30 +50,32 @@ discriminator = Discriminator().to(device)
 generator_optim = Adam(generator.parameters(),lr=lr)
 discriminator_optim = Adam(discriminator.parameters(),lr=lr)
 
-generator_loss = GenLoss()
-discriminator_loss = DiscLoss()
+generator_loss = GenLoss().to(device)
+discriminator_loss = DiscLoss().to(device)
 
 
 for epoch in range(1,num_epochs+1):
+
     for bch_idx, (lr_img,hr_img) in enumerate(tqdm(dataloader)):
 
         lr_img = lr_img.to(device)
         hr_img = hr_img.to(device)
 
+        
+        # generate hr image
+        generated_hr_img = generator(lr_img)
 
         # discriminator training
 
         discriminator_optim.zero_grad()
 
-        # generate hr image
-        generated_hr_img = generator(lr_img)
+        
 
-
-        disc_real_out = discriminator(hr_img)
         disc_generated_out = discriminator(generated_hr_img.detach())
+        disc_real_out = discriminator(hr_img)
 
-        real_label = torch.ones_like(disc_real_out).to(device)
-        generated_label = torch.zeros_like(disc_generated_out).to(device)
+        real_label = torch.ones_like(disc_real_out.detach()).to(device)
+        generated_label = torch.zeros_like(disc_generated_out.detach()).to(device)
 
         d_loss = discriminator_loss(disc_real_out,disc_generated_out,real_label,generated_label)
 
@@ -84,6 +86,10 @@ for epoch in range(1,num_epochs+1):
         # Generator Training
 
         generator_optim.zero_grad()
+
+        generated_hr_img = generator(lr_img)
+        disc_generated_out = discriminator(generated_hr_img.detach())
+
 
         g_loss = generator_loss(generated_hr_img,hr_img,disc_generated_out,real_label)
         g_loss.backward()

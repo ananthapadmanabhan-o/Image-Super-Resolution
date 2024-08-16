@@ -5,8 +5,10 @@ class GenLoss(nn.Module):
     def __init__(self):
         super().__init__()
 
-        self.vgg = models.vgg19(weights='DEFAULT').features[:36]
+        self.vgg = models.vgg19(weights='DEFAULT').features[:20]
         self.vgg.eval()
+        for param in self.vgg.parameters():
+            param.require_grad = False
         self.mse = nn.MSELoss()
 
         self.bce = nn.BCEWithLogitsLoss()
