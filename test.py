@@ -34,7 +34,7 @@ dataset = Div2kDataset(
 )
 
 
-dataloader = DataLoader(dataset,batch_size=1,num_workers=2,shuffle=True)
+dataloader = DataLoader(dataset,batch_size=4,num_workers=4,shuffle=True)
 
 
 
@@ -53,6 +53,7 @@ discriminator_optim = Adam(discriminator.parameters(),lr=lr)
 generator_loss = GenLoss().to(device)
 discriminator_loss = DiscLoss().to(device)
 
+print(f'Training Device: {device}')
 
 for epoch in range(1,num_epochs+1):
 
