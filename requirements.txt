@@ -2,4 +2,5 @@ torch
 torchvision
 tqdm
 opencv-python
-
+ensure
+python-box

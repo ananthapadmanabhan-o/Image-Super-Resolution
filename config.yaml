@@ -1,0 +1,16 @@
+artifacts_root: artifacts
+
+data_ingestion:
+  root_dir: artifacts/data_ingestion
+  train_source_url: http://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_train_HR.zip
+  valid_source_url: http://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_valid_HR.zip
+  unzip_dir: artifacts/data_ingestion
+
+data_transformation:
+  root_dir: artifacts/data_transformation
+  source_dir: artifacts/data_transformation/DIV2K_train_HR
+
+model:
+  root_dir: artifacts/model
+  model_path: arartifacts/model/model.pth
+  

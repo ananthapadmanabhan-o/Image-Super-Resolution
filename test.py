@@ -1,13 +1,13 @@
 import torch
-from src.dataset.dataset import Div2kDataset
+from isrgan.dataset.dataset import Div2kDataset
 from torch.utils.data import DataLoader
 from torchvision.transforms import transforms
 
-from src.model.generator import Generator
-from src.model.discriminator import Discriminator
+from isrgan.model.generator import Generator
+from isrgan.model.discriminator import Discriminator
 
-from src.losses.disc_loss import DiscLoss
-from src.losses.gen_loss import GenLoss
+from isrgan.losses.disc_loss import DiscLoss
+from isrgan.losses.gen_loss import GenLoss
 
 from torch.optim import Adam 
 
@@ -34,7 +34,7 @@ dataset = Div2kDataset(
 )
 
 
-dataloader = DataLoader(dataset,batch_size=4,num_workers=4,shuffle=True)
+dataloader = DataLoader(dataset,batch_size=1,num_workers=2,shuffle=True)
 
 
 
