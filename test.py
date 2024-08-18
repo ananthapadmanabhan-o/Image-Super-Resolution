@@ -1,13 +1,13 @@
 import torch
-from isrgan.dataset.dataset import Div2kDataset
+from srgan.data.dataset import Div2kDataset
 from torch.utils.data import DataLoader
 from torchvision.transforms import transforms
 
-from isrgan.model.generator import Generator
-from isrgan.model.discriminator import Discriminator
+from srgan.model.generator import Generator
+from srgan.model.discriminator import Discriminator
 
-from isrgan.losses.disc_loss import DiscLoss
-from isrgan.losses.gen_loss import GenLoss
+from srgan.losses.disc_loss import DiscLoss
+from srgan.losses.gen_loss import GenLoss
 
 from torch.optim import Adam 
 

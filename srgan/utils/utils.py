@@ -2,7 +2,7 @@ import os
 import yaml
 from pathlib import Path
 from box import ConfigBox
-from isrgan import logger 
+from srgan import logger 
 from ensure import ensure_annotations
 
 
