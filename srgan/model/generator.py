@@ -1,6 +1,6 @@
 from torch import nn
-from .residual_block import ResidualBlock
-from .upsample_block import UpsampleBlock
+from ._residual_block import ResidualBlock
+from ._upsample_block import UpsampleBlock
 from math import log2
     
     
@@ -18,12 +18,8 @@ class Generator(nn.Module):
         )
 
 
-        self.residual_blocks = nn.Sequential()
-        for _ in range(self.num_blocks):
-            self.residual_blocks.append(ResidualBlock(64))
-            pass
-
-
+        residual_blocks = [ResidualBlock(64) for _ in range(self.num_blocks)]
+        self.residual_blocks = nn.Sequential(*residual_blocks)
     
 
         self.middle_block = nn.Sequential(

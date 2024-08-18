@@ -1,8 +1,9 @@
 from torch import nn 
-from .conv_block import ConvBlock
+from ._conv_block import ConvBlock
 
 class Discriminator(nn.Module):
     ''' Class for the Discriminator '''
+    
 
     def __init__(self):
         super().__init__()
