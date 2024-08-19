@@ -2,7 +2,7 @@ import os
 from torch.utils.data import Dataset
 import cv2
 
-class Div2kDataset(Dataset):
+class SrganDataset(Dataset):
     def __init__(self,root_dir,downscale=4,transform=None):
         super().__init__() 
 

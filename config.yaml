@@ -8,7 +8,8 @@ data_ingestion:
 
 data_transformation:
   root_dir: artifacts/data_transformation
-  source_dir: artifacts/data_transformation/DIV2K_train_HR
+  train_source_dir: artifacts/data_ingestion/DIV2K_train_HR
+  valid_source_dir: artifacts/data_ingestion/DIV2K_valid_HR
 
 model:
   root_dir: artifacts/model

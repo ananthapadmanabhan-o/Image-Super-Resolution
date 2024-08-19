@@ -4,3 +4,4 @@ tqdm
 opencv-python
 ensure
 python-box
+download
