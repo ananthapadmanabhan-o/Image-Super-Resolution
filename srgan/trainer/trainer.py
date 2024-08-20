@@ -1,6 +1,7 @@
 from torch import ones_like,zeros_like
 from torch.utils.data import DataLoader
 from srgan import logger
+from tqdm import tqdm
 
 class SrganTrainer:
     def __init__(
@@ -60,12 +61,10 @@ class SrganTrainer:
                 disc_out_generated = self.discriminator(generated_hr_img.detach())
 
                 gen_loss = self.generator_loss(generated_hr_img,hr_img,disc_out_generated,real_label)
-
+                gen_loss.backward()
                 gen_optimizer.step()
 
 
+            if epoch%1==0:
+                print(f"Epoch [{epoch}/{epochs}], Step [{bch_idx}/{len(train_dataloader)}], D Loss: {disc_loss.item():.4f}, G Loss: {gen_loss.item():.4f}")
 
-
-                
-    def eval(self):
-        pass

@@ -1,10 +1,10 @@
 import torch
-from srgan.data.dataset import Div2kDataset
+from srgan.data import SrganDataset
 from torch.utils.data import DataLoader
 from torchvision.transforms import transforms
 
-from srgan.model.generator import Generator
-from srgan.model.discriminator import Discriminator
+from srgan.model import Generator
+from srgan.model import Discriminator
 
 from srgan.losses.disc_loss import DiscLoss
 from srgan.losses.gen_loss import GenLoss
@@ -27,7 +27,7 @@ data_transform = transforms.Compose([
 ])
 
 
-dataset = Div2kDataset(
+dataset = SrganDataset(
     root_dir='image_hr',
     downscale=4,
     transform=data_transform
@@ -97,5 +97,5 @@ for epoch in range(1,num_epochs+1):
 
         generator_optim.step()
 
-
-    print(f"Epoch [{epoch}/{num_epochs}], Step [{bch_idx}/{len(dataloader)}], D Loss: {d_loss.item():.4f}, G Loss: {g_loss.item():.4f}")
+    if epoch%1==0:
+        print(f"Epoch [{epoch}/{num_epochs}], Step [{bch_idx}/{len(dataloader)}], D Loss: {d_loss.item():.4f}, G Loss: {g_loss.item():.4f}")
