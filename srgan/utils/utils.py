@@ -7,7 +7,7 @@ from ensure import ensure_annotations
 
 
 
-@ensure_annotations
+# @ensure_annotations
 def read_yaml(yaml_path: Path) -> ConfigBox:
     '''
     reads the yaml file from the path and
@@ -22,13 +22,13 @@ def read_yaml(yaml_path: Path) -> ConfigBox:
     try:
         with open(yaml_path) as yaml_file:
             contents = yaml.safe_load(yaml_file)
-            logger.info(f'Yaml file {yaml_path} loaded Successfully')
+            logger.info(f'{yaml_path} loaded Successfully')
             return ConfigBox(contents)
     except Exception as e:
         raise e
 
 
-@ensure_annotations  
+# @ensure_annotations  
 def create_directories(dir_path: list) -> None:
     '''
     creates the directories in the given list

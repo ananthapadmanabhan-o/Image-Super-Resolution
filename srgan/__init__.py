@@ -4,7 +4,6 @@ import logging
 
 
 log_format = '[%(asctime)s: %(levelname)s: %(module)s: %(message)s]'
-
 log_dir = 'logs'
 log_file_path = 'logs/runnig_logs.log'
 
