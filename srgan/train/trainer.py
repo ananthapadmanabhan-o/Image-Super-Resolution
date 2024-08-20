@@ -10,15 +10,15 @@ class SrganTrainer:
             generator_loss,
             discriminator,
             discriminator_loss,
-            device='gpu'
+            device='cuda'
             
     ) -> None:
-    
-        self.generator = generator
-        self.discriminator = discriminator
-        self.generator_loss = generator_loss
-        self.discriminator_loss = discriminator_loss
         self.device = device
+        self.generator = generator.to(self.device)
+        self.discriminator = discriminator.to(self.device)
+        self.generator_loss = generator_loss.to(self.device)
+        self.discriminator_loss = discriminator_loss.to(self.device)
+      
     
         
     def train(self,dataset,batch_size,epochs,gen_optimizer,disc_optimizer):
@@ -32,7 +32,7 @@ class SrganTrainer:
         logger.info(f'Training started on {self.device}')
 
         for epoch in range(1,epochs+1):
-            for bch_idx, (lr_img,hr_img) in enumerate(train_dataloader,start=1):
+            for bch_idx, (lr_img,hr_img) in enumerate(tqdm(train_dataloader),start=1):
 
                 lr_img = lr_img.to(self.device)
                 hr_img = hr_img.to(self.device)

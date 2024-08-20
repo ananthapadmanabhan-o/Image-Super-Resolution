@@ -12,7 +12,7 @@ os.makedirs(log_dir,exist_ok=True)
 
 
 logging.basicConfig(
-    level=logging.info,
+    level=logging.INFO,
     format=log_format,
     handlers=[
         logging.FileHandler(log_file_path),

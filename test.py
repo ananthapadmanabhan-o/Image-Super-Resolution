@@ -6,8 +6,8 @@ from torchvision.transforms import transforms
 from srgan.model import Generator
 from srgan.model import Discriminator
 
-from srgan.losses.disc_loss import DiscLoss
-from srgan.losses.gen_loss import GenLoss
+from srgan.losses import DiscLoss
+from srgan.losses import GenLoss
 
 from torch.optim import Adam 
 
