@@ -1,10 +1,8 @@
 import torch
-from torch.utils.data import DataLoader
 from srgan.data import SrganDataset
 from srgan.model import Generator, Discriminator
 from srgan.losses import GenLoss, DiscLoss
 from torch.optim import Adam 
-from tqdm import tqdm
 from torchvision import transforms
 
 from srgan.train import SrganTrainer
