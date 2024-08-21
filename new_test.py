@@ -1,4 +1,3 @@
-import torch
 from srgan.data import SrganDataset
 from srgan.model import Generator, Discriminator
 from srgan.losses import GenLoss, DiscLoss
