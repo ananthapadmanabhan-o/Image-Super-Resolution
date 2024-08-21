@@ -1,5 +1,6 @@
 from download import download
 from srgan import logger
+from srgan.utils import create_directories
 
 class DataIngestion:
     def __init__(self,url,dir_path,kind='zip') -> None:
@@ -9,6 +10,7 @@ class DataIngestion:
         
         
     def ingest_data(self):
+        create_directories([self.dir_path])
         logger.info(f'Data Ingestion Started')
         path = download(
             url=self.url,

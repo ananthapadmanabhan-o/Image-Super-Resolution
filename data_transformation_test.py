@@ -9,8 +9,8 @@ create_directories([data_transformation_config.valid_data_transformed])
 
 
 data_transformation = DataTransformation(
-    source_dir=data_transformation_config.valid_source_dir,
-    destination_dir=data_transformation_config.valid_data_transformed
+    source_dir=data_transformation_config.train_source_dir,
+    destination_dir=data_transformation_config.train_data_transformed
 )
 
 

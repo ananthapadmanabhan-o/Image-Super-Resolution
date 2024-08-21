@@ -6,6 +6,7 @@ import numpy as np
 from tqdm import tqdm
 
 
+
 class DataTransformation:
     def __init__(
             self,
@@ -26,6 +27,8 @@ class DataTransformation:
             img_path = os.path.join(self.source_dir,img)
             img = np.asarray(Image.open(img_path))
 
+
+
             img_height, img_width, img_channel = img.shape
             
             crop_height = (img_height//patch_size)*patch_size
@@ -39,26 +42,14 @@ class DataTransformation:
             )
 
             row, col = patched_imgs.shape[:2]
-            print(patched_imgs.shape)
-            print(row,col)
+
 
             for i in range(row):
                 for j in range(col):
-                    img_ptch = patched_imgs[i,j,0,:,:]
-                    img = Image.fromarray(img_ptch)
-                    
-                    img_save_pth = os.path.join(self.destination_dir,f'{count}.png')
-                    
-                    img.save(img_save_pth)
+                    img_patch = patched_imgs[i,j,0,:,:]
+                    img = Image.fromarray(img_patch)
+                    img_save_path = os.path.join(self.destination_dir,f'{count}_hr.png')
+                    img.save(img_save_path)
                     count+=1
                     
-
-            break
-
         logger.info('Data Transformation ended')
-
-
-# data_transformation:
-#   root_dir: artifacts/data_transformation
-#   train_source_dir: artifacts/data_ingestion/DIV2K_train_HR
-#   valid_source_dir: artifacts/data_ingestion/DIV2K_valid_HR
