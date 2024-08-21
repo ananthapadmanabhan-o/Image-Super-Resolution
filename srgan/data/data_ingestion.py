@@ -20,12 +20,3 @@ class DataIngestion:
         )
         logger.info(f'Data ingested successfull')
         
-
-
-"""
-data_ingestion:
-  root_dir: artifacts/data_ingestion
-  train_source_url: http://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_train_HR.zip
-  valid_source_url: http://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_valid_HR.zip
-  unzip_dir: artifacts/data_ingestion
-"""

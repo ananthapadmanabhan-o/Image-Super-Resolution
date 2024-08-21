@@ -163,3 +163,4 @@ cython_debug/
 div2k_hr_train_data/
 image_hr/
 artifacts/
+logs/

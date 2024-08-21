@@ -5,3 +5,4 @@ opencv-python
 ensure
 python-box
 download
+patchify
