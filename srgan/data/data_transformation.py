@@ -4,6 +4,7 @@ from srgan import logger
 from PIL import Image
 import numpy as np
 from tqdm import tqdm
+from srgan.utils import create_directories
 
 
 
@@ -18,6 +19,9 @@ class DataTransformation:
         
 
     def transform_data(self,patch_size=256):
+
+        create_directories([self.destination_dir])
+
         logger.info('Data Transformation started')
         image_list = os.listdir(self.source_dir)
 
