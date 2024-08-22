@@ -19,5 +19,5 @@ class DataIngestion:
             progressbar=True,
             verbose=True,
         )
-        logger.info(f'Data ingested successfull')
+        logger.info(f'Data ingested successfull to {self.dir_path}')
         

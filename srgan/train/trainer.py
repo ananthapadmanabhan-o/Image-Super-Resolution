@@ -2,6 +2,7 @@ from torch import ones_like,zeros_like
 from torch.utils.data import DataLoader
 from srgan import logger
 from tqdm import tqdm
+from srgan.utils import create_directories
 
 class SrganTrainer:
     def __init__(
@@ -10,7 +11,8 @@ class SrganTrainer:
             generator_loss,
             discriminator,
             discriminator_loss,
-            device='cuda'
+            device='cuda',
+            path=None
             
     ) -> None:
         self.device = device
@@ -18,10 +20,15 @@ class SrganTrainer:
         self.discriminator = discriminator.to(self.device)
         self.generator_loss = generator_loss.to(self.device)
         self.discriminator_loss = discriminator_loss.to(self.device)
+        self.path = path
+
       
     
         
     def train(self,dataset,batch_size,epochs,gen_optimizer,disc_optimizer):
+        if not self.path:
+            create_directories([self.path])
+
         train_dataloader = DataLoader(
             dataset=dataset,
             batch_size=batch_size,
@@ -64,6 +71,7 @@ class SrganTrainer:
                 gen_loss.backward()
                 gen_optimizer.step()
 
+            
 
             if epoch%1==0:
                 print(f"Epoch [{epoch}/{epochs}], Step [{bch_idx}/{len(train_dataloader)}], D Loss: {disc_loss.item():.4f}, G Loss: {gen_loss.item():.4f}")

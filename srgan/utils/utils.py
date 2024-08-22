@@ -4,6 +4,7 @@ from pathlib import Path
 from box import ConfigBox
 from srgan import logger 
 from ensure import ensure_annotations
+import torch
 
 
 
@@ -40,3 +41,4 @@ def create_directories(dir_path: list) -> None:
     for path in dir_path:
         os.makedirs(path,exist_ok=True)
         logger.info(f'Created directory {path}')
+

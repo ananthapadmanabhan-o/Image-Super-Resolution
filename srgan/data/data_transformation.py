@@ -56,4 +56,4 @@ class DataTransformation:
                     img.save(img_save_path)
                     count+=1
                     
-        logger.info('Data Transformation ended')
+        logger.info(f'Data transformed succesfully to {self.destination_dir}')

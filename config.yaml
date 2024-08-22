@@ -12,7 +12,16 @@ DATA_TRANSFORMATION:
   VALID_SOURCE_DIR: artifacts/data_ingestion/DIV2K_valid_HR
   TRAIN_DATA_TRANSFORMED: artifacts/data_transformation/TRANSFORMED_train_HR 
   VALID_DATA_TANSFORMED: artifacts/data_transformation/TRANSFORMED_valid_HR
+  DOWN_SCALE: 4
+
   
 MODEL:
-  ROOT_DIR: artifacts/model
-  MODEL_PATH: arartifacts/model/model.pth
+  ROOT_DIR: models
+  MODEL_PATH: models/model.pth
+  NUM_BLOCKS: 5
+  SCALE_FACTOR: 4
+  LR: 0.001
+  DEVICE: cuda
+  BATCH_SIZE: 1
+  EPOCHS: 1
+

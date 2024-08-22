@@ -23,7 +23,7 @@ class Generator(nn.Module):
     
 
         self.middle_block = nn.Sequential(
-            nn.Conv2d(64,64,3,1,1),
+            nn.Conv2d(64,64,3,1,1,bias=False),
             nn.BatchNorm2d(num_features=64)
         )
 

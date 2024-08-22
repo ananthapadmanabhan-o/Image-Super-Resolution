@@ -6,3 +6,4 @@ ensure
 python-box
 download
 patchify
+-e .
