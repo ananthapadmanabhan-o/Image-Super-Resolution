@@ -86,11 +86,12 @@ class SrganTrainer:
             if epoch%1==0:
                 print(f"Epoch [{epoch}/{epochs}], Step [{bch_idx}/{len(train_dataloader)}], D Loss: {disc_loss.item():.4f}, G Loss: {gen_loss.item():.4f}")
         
+        
+
+        torch.save(self.generator,self.path)
         Loss_dataframe = pd.DataFrame({
             'epoch':epoch,
             'G_Loss':G_Loss,
             'D_Loss':D_Loss
         })
         Loss_dataframe.to_csv('model_log.csv')
-
-        torch.save(self.generator,self.path)
