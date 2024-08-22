@@ -2,6 +2,7 @@ from torch import ones_like,zeros_like
 from torch.utils.data import DataLoader
 from srgan import logger
 from tqdm import tqdm
+import pandas as pd
 import torch
 
 class SrganTrainer:
@@ -32,6 +33,9 @@ class SrganTrainer:
             num_workers=2,
             shuffle=True
         )
+
+        G_Loss = []
+        D_Loss = []
 
         logger.info(f'Training started on {self.device}')
 
@@ -67,10 +71,26 @@ class SrganTrainer:
                 gen_loss = self.generator_loss(generated_hr_img,hr_img,disc_out_generated,real_label)
                 gen_loss.backward()
                 gen_optimizer.step()
+            
+            torch.save({
+                'epoch':epoch,
+                'G_loss':gen_loss.item(),
+
+            })
 
             
+            G_Loss.append(gen_loss.item())
+            D_Loss.append(disc_loss.item())
+
 
             if epoch%1==0:
                 print(f"Epoch [{epoch}/{epochs}], Step [{bch_idx}/{len(train_dataloader)}], D Loss: {disc_loss.item():.4f}, G Loss: {gen_loss.item():.4f}")
         
+        Loss_dataframe = pd.DataFrame({
+            'epoch':epoch,
+            'G_Loss':G_Loss,
+            'D_Loss':D_Loss
+        })
+        Loss_dataframe.to_csv('model_log.csv')
+
         torch.save(self.generator,self.path)
