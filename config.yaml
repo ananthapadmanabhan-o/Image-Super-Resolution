@@ -1,19 +1,18 @@
-artifacts_root: artifacts
+ARTIFACTS_ROOT: artifacts
 
-data_ingestion:
-  root_dir: artifacts/data_ingestion
-  train_source_url: http://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_train_HR.zip
-  valid_source_url: http://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_valid_HR.zip
-  unzip_dir: artifacts/data_ingestion
+DATA_INGESTION:
+  ROOT_DIR: artifacts/data_ingestion
+  TRAIN_SOURCE_URL: http://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_train_HR.zip
+  VALID_SOURCE_URL: http://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_valid_HR.zip
+  UNZIP_DIR: artifacts/data_ingestion
 
-data_transformation:
-  root_dir: artifacts/data_transformation
-  train_source_dir: artifacts/data_ingestion/DIV2K_train_HR
-  valid_source_dir: artifacts/data_ingestion/DIV2K_valid_HR
-  train_data_transformed: artifacts/data_transformation/TRANSFORMED_train_HR 
-  valid_data_transformed: artifacts/data_transformation/TRANSFORMED_valid_HR
+DATA_TRANSFORMATION:
+  ROOT_DIR: artifacts/data_transformation
+  TRAIN_SOURCE_DIR: artifacts/data_ingestion/DIV2K_train_HR
+  VALID_SOURCE_DIR: artifacts/data_ingestion/DIV2K_valid_HR
+  TRAIN_DATA_TRANSFORMED: artifacts/data_transformation/TRANSFORMED_train_HR 
+  VALID_DATA_TANSFORMED: artifacts/data_transformation/TRANSFORMED_valid_HR
   
-model:
-  root_dir: artifacts/model
-  model_path: arartifacts/model/model.pth
-  
+MODEL:
+  ROOT_DIR: artifacts/model
+  MODEL_PATH: arartifacts/model/model.pth
