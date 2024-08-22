@@ -44,6 +44,7 @@ def main():
         generator_loss=g_loss,
         discriminator=disc,
         discriminator_loss=d_loss,
+        path=model_config.MODEL_PATH,
         device= model_config.DEVICE
     )
 
