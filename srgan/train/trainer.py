@@ -2,7 +2,6 @@ from torch import ones_like,zeros_like
 from torch.utils.data import DataLoader
 from srgan import logger
 from tqdm import tqdm
-from srgan.utils import create_directories
 import torch
 
 class SrganTrainer:
@@ -26,8 +25,7 @@ class SrganTrainer:
     
         
     def train(self,dataset,batch_size,epochs,gen_optimizer,disc_optimizer):
-        create_directories([self.path])
-
+        
         train_dataloader = DataLoader(
             dataset=dataset,
             batch_size=batch_size,
@@ -64,7 +62,7 @@ class SrganTrainer:
                 gen_optimizer.zero_grad()
 
                 generated_hr_img = self.generator(lr_img)
-                disc_out_generated = self.discriminator(generated_hr_img.detach())
+                disc_out_generated = self.discriminator(generated_hr_img)
 
                 gen_loss = self.generator_loss(generated_hr_img,hr_img,disc_out_generated,real_label)
                 gen_loss.backward()
