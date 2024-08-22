@@ -18,6 +18,7 @@ class DataIngestion:
             kind=self.kind,
             progressbar=True,
             verbose=True,
+            replace=True
         )
         logger.info(f'Data ingested successfull to {self.dir_path}')
         

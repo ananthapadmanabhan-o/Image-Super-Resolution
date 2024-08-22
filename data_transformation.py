@@ -7,12 +7,12 @@ def main():
     data_config = config.DATA_TRANSFORMATION
 
 
-    train_data_transformation = DataTransformation(
-        source_dir=data_config.TRAIN_SOURCE_DIR,
-        destination_dir=data_config.TRAIN_DATA_TRANSFORMED
-    )
+    # train_data_transformation = DataTransformation(
+    #     source_dir=data_config.TRAIN_SOURCE_DIR,
+    #     destination_dir=data_config.TRAIN_DATA_TRANSFORMED
+    # )
 
-    train_data_transformation.transform_data()
+    # train_data_transformation.transform_data()
 
 
     valid_data_transformation = DataTransformation(
