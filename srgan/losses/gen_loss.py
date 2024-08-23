@@ -11,7 +11,7 @@ class GenLoss(nn.Module):
             param.require_grad = False
         self.mse = nn.MSELoss()
 
-        self.bce = nn.BCEWithLogitsLoss()
+        self.bce = nn.BCELoss()
         self.content = nn.MSELoss()
 
 
