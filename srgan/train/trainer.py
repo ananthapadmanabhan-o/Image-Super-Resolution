@@ -2,6 +2,7 @@ from torch import ones_like,zeros_like
 from torch.utils.data import DataLoader
 from srgan import logger
 from tqdm import tqdm
+from torch.optim import Adam 
 import pandas as pd
 import torch
 
@@ -25,7 +26,10 @@ class SrganTrainer:
       
     
         
-    def train(self,dataset,batch_size,epochs,gen_optimizer,disc_optimizer):
+    def train(self,dataset,batch_size,epochs,lr):
+
+        gen_optimizer = Adam(self.generator.parameters(),lr=lr)
+        disc_optimizer = Adam(self.generator.parameters(),lr=lr)
         
         train_dataloader = DataLoader(
             dataset=dataset,

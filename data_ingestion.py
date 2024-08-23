@@ -7,12 +7,12 @@ def main():
     data_ingestion_config = config.DATA_INGESTION
 
 
-    # train_data_ingestion = DataIngestion(
-    #     url=data_ingestion_config.TRAIN_SOURCE_URL,
-    #     dir_path=data_ingestion_config.UNZIP_DIR
-    # )
+    train_data_ingestion = DataIngestion(
+        url=data_ingestion_config.TRAIN_SOURCE_URL,
+        dir_path=data_ingestion_config.UNZIP_DIR
+    )
 
-    # train_data_ingestion.ingest_data()
+    train_data_ingestion.ingest_data()
 
 
     valid_data_ingestion = DataIngestion(
