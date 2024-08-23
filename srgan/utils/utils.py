@@ -4,7 +4,6 @@ from pathlib import Path
 from box import ConfigBox
 from srgan import logger 
 from ensure import ensure_annotations
-import torch
 
 
 
