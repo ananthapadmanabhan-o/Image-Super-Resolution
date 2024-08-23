@@ -29,13 +29,10 @@ class SrganDataset(Dataset):
     def __getitem__(self, index):
 
         img_file_path = os.path.join(self.root_dir,self.images[index])
-
         hr_img = Image.open(img_file_path)
      
-        if self.transform:
-            hr_img = self.hr_transform(hr_img)
-            lr_img = self.lr_transform(hr_img)
-
+        hr_img = self.hr_transform(hr_img)
+        lr_img = self.lr_transform(hr_img)
 
         return lr_img, hr_img
     
