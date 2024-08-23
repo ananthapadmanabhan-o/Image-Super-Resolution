@@ -1,34 +1,40 @@
 import os 
+import torch
 from torch.utils.data import Dataset
-import cv2
+from torchvision import transforms
+from PIL import Image
+
 
 class SrganDataset(Dataset):
-    def __init__(self,root_dir,downscale=4,transform=None):
+    def __init__(self,root_dir,crop_size=100,downscale=4,):
         super().__init__() 
 
         self.root_dir = root_dir
+        self.crop_size = crop_size
         self.downscale = downscale
-        self.transform = transform
         self.images = os.listdir(self.root_dir)
+
+        self.hr_transform = transforms.Compose([
+            transforms.PILToTensor(),
+            transforms.CenterCrop(),
+            transforms.ConvertImageDtype(torch.float),
+            transforms.Normalize(mean=0,std=1),
+        ])
+
+        self.lr_transform = transforms.Compose([
+            transforms.Resize(self.crop_size//self.downscale)
+        ])
+
     
     def __getitem__(self, index):
 
         img_file_path = os.path.join(self.root_dir,self.images[index])
 
-        hr_img = cv2.imread(img_file_path,1)
-        # hr_img = cv2.cvtColor(hr_img,cv2.COLOR_BGR2RGB)
-        img_h, img_w, _ = hr_img.shape
-
-        crop_h = (img_h//self.downscale)*self.downscale
-        crop_w = (img_w//self.downscale)*self.downscale
-
-        hr_img = hr_img[:crop_h,:crop_w,:]
-        lr_img = cv2.resize(hr_img,(crop_w//self.downscale,crop_h//self.downscale))
-
-
+        hr_img = Image.open(img_file_path)
+     
         if self.transform:
-            hr_img = self.transform(hr_img)
-            lr_img = self.transform(lr_img)
+            hr_img = self.hr_transform(hr_img)
+            lr_img = self.lr_transform(lr_img)
 
 
         return lr_img, hr_img
