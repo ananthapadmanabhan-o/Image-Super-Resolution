@@ -34,7 +34,7 @@ class SrganDataset(Dataset):
      
         if self.transform:
             hr_img = self.hr_transform(hr_img)
-            lr_img = self.lr_transform(lr_img)
+            lr_img = self.lr_transform(hr_img)
 
 
         return lr_img, hr_img
