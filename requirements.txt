@@ -1,7 +1,7 @@
 torch
 torchvision
 tqdm
-opencv-python
+pillow
 ensure
 python-box
 download
