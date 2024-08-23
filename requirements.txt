@@ -5,6 +5,5 @@ opencv-python
 ensure
 python-box
 download
-patchify
 pandas
 -e .

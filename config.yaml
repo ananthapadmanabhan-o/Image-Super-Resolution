@@ -1,17 +1,14 @@
 ARTIFACTS_ROOT: artifacts
 
 DATA_INGESTION:
-  ROOT_DIR: artifacts/data_ingestion
+  ROOT_DIR: artifacts/data
   TRAIN_SOURCE_URL: http://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_train_HR.zip
   VALID_SOURCE_URL: http://data.vision.ee.ethz.ch/cvl/DIV2K/DIV2K_valid_HR.zip
-  UNZIP_DIR: artifacts/data_ingestion
 
-DATA_TRANSFORMATION:
-  ROOT_DIR: artifacts/data_transformation
-  TRAIN_SOURCE_DIR: artifacts/data_ingestion/DIV2K_train_HR
-  VALID_SOURCE_DIR: artifacts/data_ingestion/DIV2K_valid_HR
-  TRAIN_DATA_TRANSFORMED: artifacts/data_transformation/TRANSFORMED_train_HR 
-  VALID_DATA_TANSFORMED: artifacts/data_transformation/TRANSFORMED_valid_HR
+DATA:
+  TRAIN_SOURCE_DIR: artifacts/data/DIV2K_train_HR
+  VALID_SOURCE_DIR: artifacts/data/DIV2K_valid_HR
+  CROP_SIZE: 256
   DOWN_SCALE: 4
 
   
@@ -22,6 +19,6 @@ MODEL:
   SCALE_FACTOR: 4
   LR: 0.001
   DEVICE: cuda
-  BATCH_SIZE: 16
+  BATCH_SIZE: 5
   EPOCHS: 5
 
