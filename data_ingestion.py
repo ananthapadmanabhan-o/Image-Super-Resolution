@@ -6,10 +6,6 @@ def main():
     config = read_yaml('config.yaml')
     data_ingestion_config = config.DATA_INGESTION
 
-
-
-    
-
     '''Data Ingestion parameters'''
     train_data_url = data_ingestion_config.TRAIN_SOURCE_URL
     validation_data_url = data_ingestion_config.VALID_SOURCE_URL
@@ -33,6 +29,9 @@ def main():
     )
 
     valid_data_ingestion.ingest_data()
+
+
+
 
 if __name__ == '__main__':
     main()
