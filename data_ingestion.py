@@ -7,17 +7,29 @@ def main():
     data_ingestion_config = config.DATA_INGESTION
 
 
-    train_data_ingestion = DataIngestion(
-        url=data_ingestion_config.TRAIN_SOURCE_URL,
-        dir_path=data_ingestion_config.UNZIP_DIR
-    )
 
+    
+
+    '''Data Ingestion parameters'''
+    train_data_url = data_ingestion_config.TRAIN_SOURCE_URL
+    validation_data_url = data_ingestion_config.VALID_SOURCE_URL
+    dir_path = data_ingestion_config.ROOT_DIR
+
+
+
+    '''Training Data ingestion'''
+    train_data_ingestion = DataIngestion(
+        url=train_data_url,
+        dir_path=dir_path
+    )
     train_data_ingestion.ingest_data()
 
 
+
+    '''Validation data ingestion'''
     valid_data_ingestion = DataIngestion(
-        url=data_ingestion_config.VALID_SOURCE_URL,
-        dir_path=data_ingestion_config.UNZIP_DIR
+        url=validation_data_url,
+        dir_path=dir_path
     )
 
     valid_data_ingestion.ingest_data()
