@@ -20,5 +20,5 @@ MODEL:
   LR: 0.001
   DEVICE: cuda
   BATCH_SIZE: 16
-  EPOCHS: 50
+  EPOCHS: 100
 
