@@ -87,4 +87,4 @@ class SrganTrainer:
             'G_Loss':G_Loss,
             'D_Loss':D_Loss
         })
-        Loss_dataframe.to_csv('model_log.csv')
+        Loss_dataframe.to_csv('logs/model_log.csv')
