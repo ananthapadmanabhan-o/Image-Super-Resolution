@@ -72,13 +72,6 @@ class SrganTrainer:
                 gen_loss.backward()
                 gen_optimizer.step()
             
-            torch.save({
-                'epoch':epoch,
-                'G_loss':gen_loss.item(),
-
-            })
-
-            
             G_Loss.append(gen_loss.item())
             D_Loss.append(disc_loss.item())
 
