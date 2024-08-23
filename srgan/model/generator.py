@@ -36,7 +36,7 @@ class Generator(nn.Module):
 
         self.output_block = nn.Sequential(
                     nn.Conv2d(256,3,9,1,padding=4),
-                    nn.Tanh()
+                    nn.Sigmoid()
                 )
 
     def forward(self,x):
