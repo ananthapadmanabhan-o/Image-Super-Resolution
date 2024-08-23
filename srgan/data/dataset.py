@@ -16,7 +16,7 @@ class SrganDataset(Dataset):
 
         self.hr_transform = transforms.Compose([
             transforms.PILToTensor(),
-            transforms.CenterCrop(),
+            transforms.CenterCrop(self.crop_size),
             transforms.ConvertImageDtype(torch.float),
             transforms.Normalize(mean=0,std=1),
         ])
