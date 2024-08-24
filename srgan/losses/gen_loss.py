@@ -3,6 +3,20 @@ from torchvision import models
 
 
 class GenLoss(nn.Module):
+    """
+    Loss class for the Generator
+    ----------------------------
+    Total loss is the combination of:
+
+        content_loss:
+            MSE loss
+        perceptual_loss:
+            MSE loss of VGG output
+        adversarial_loss:
+            BCE loss
+
+    """
+
     def __init__(self):
         super().__init__()
 

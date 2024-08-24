@@ -5,7 +5,20 @@ from math import log2
 
 
 class Generator(nn.Module):
-    def __init__(self, num_blocks=16, scale_factor=4):
+    """
+    Generator
+    ---------
+    Generates high resolution images for low resolution images
+
+    Attributes
+    ----------
+    num_blocks:
+        number of residual blocks need for the generator
+    scale_factor:
+        scaling factor for the image to increase resolution
+    """
+
+    def __init__(self, num_blocks=6, scale_factor=4):
         super().__init__()
 
         self.num_blocks = num_blocks
@@ -35,10 +48,7 @@ class Generator(nn.Module):
         input_block_out = self.input_block(x)
         residual_block_out = self.residual_blocks(input_block_out)
         middle_block_out = self.middle_block(residual_block_out)
-
         input_to_upsample = middle_block_out + input_block_out
-
         upsample_block_out = self.upsample_block(input_to_upsample)
-
         out = self.output_block(upsample_block_out)
         return out

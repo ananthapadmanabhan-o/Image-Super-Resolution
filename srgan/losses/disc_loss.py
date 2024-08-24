@@ -2,9 +2,13 @@ from torch import nn
 
 
 class DiscLoss(nn.Module):
-    def __init__(
-        self,
-    ):
+    """
+    Discriminator Loss
+    ------------------
+    BCE loss with Real and Fake data
+    """
+
+    def __init__(self):
         super().__init__()
         self.bce = nn.BCELoss()
 

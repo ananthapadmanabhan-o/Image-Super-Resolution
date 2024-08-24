@@ -2,7 +2,15 @@ from torch import nn
 
 
 class ResidualBlock(nn.Module):
-    """Residual Block for Generator"""
+    """
+    Residual Block for Generator Network
+
+    Attributes
+    ----------
+    channels:
+        number of input and output channels
+    """
+
 
     def __init__(self, channels=64):
         super().__init__()

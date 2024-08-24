@@ -2,7 +2,22 @@ from torch import nn
 
 
 class ConvBlock(nn.Module):
-    """Convolutional Block for Discriminator"""
+    """
+    Convolutional Block for Discriminator
+
+    Attributes
+    ----------
+    in_channel:
+        number of input channels for Conv2d Layer
+    out_channel:
+        number of output channels for Conv2d Layer
+    kernel:
+        kernel size for Conv2d Layer
+    stride:
+        stride for Conv2d Layer
+    padding:
+        padding for Conv2d Layer
+    """
 
     def __init__(self, in_channel=3, out_channel=3, kernel=3, stride=1, padding=1):
         super().__init__()

@@ -1,7 +1,9 @@
 from srgan.utils import read_yaml
 from srgan.data import DataIngestion
 
-
+"""
+Data ingestion pipeline script
+"""
 def main():
 
     config = read_yaml("config.yaml")

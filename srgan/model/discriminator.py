@@ -3,7 +3,11 @@ from ._conv_block import ConvBlock
 
 
 class Discriminator(nn.Module):
-    """Class for the Discriminator"""
+    """
+    Discriminator
+
+    Discriminates whether Input data is Fake(0) or Real(1)
+    """
 
     def __init__(self):
         super().__init__()

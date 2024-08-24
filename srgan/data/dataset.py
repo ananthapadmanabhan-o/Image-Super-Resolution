@@ -6,6 +6,22 @@ from PIL import Image
 
 
 class SrganDataset(Dataset):
+    """
+    Custom Dataset for srgan
+
+    Attributes
+    ----------
+    root_dir:
+        root folder of dataset
+    crop_size:
+        crop size for downsizing image
+    downscale:
+        for downscaling the low resulotion image from high resolution image
+
+
+    Returns:
+        low resolution and high resolution image
+    """
     def __init__(
         self,
         root_dir,

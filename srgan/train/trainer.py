@@ -1,13 +1,39 @@
+import torch
 from torch import ones_like, zeros_like
 from torch.utils.data import DataLoader
+from torch.optim import Adam
 from srgan import logger
 from tqdm import tqdm
-from torch.optim import Adam
 import pandas as pd
-import torch
 
 
 class SrganTrainer:
+    """
+    Class to simply Srgan Training
+
+    ...
+
+    Attributes
+    ----------
+    generator:
+        Generator class for Srgan
+    generator_loss:
+        Loss for the Generator
+    discriminator:
+        Discriminator class for srgan
+    discriminator_loss:
+        Loss for the Discriminator
+    path:
+        Path to save the model
+    device:
+        Device to run the training (Default: 'cuda')
+
+    Methods
+    -------
+    train
+        Creates own dataloader and initiates the training loop of the srgan
+    """
+
     def __init__(
         self,
         generator,
@@ -25,6 +51,25 @@ class SrganTrainer:
         self.path = path
 
     def train(self, dataset, batch_size, epochs, lr):
+        """
+        Training of the pytorch model is simplified using
+        train method.
+
+        Parameters
+        ----------
+        dataset:
+            Pytorch Dataset class
+        batch_size:
+            batch size for the dataloader
+        epochs:
+            number of epochs to run training
+        lr:
+            learning rate for optimizers
+
+        ...
+        model is saved on the model path,
+        losses on each epoch are tracked and saved in csv format in logs dir.
+        """
 
         gen_optimizer = Adam(self.generator.parameters(), lr=lr)
         disc_optimizer = Adam(self.generator.parameters(), lr=lr)

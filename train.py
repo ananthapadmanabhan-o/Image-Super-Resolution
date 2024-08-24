@@ -1,16 +1,28 @@
 from srgan.data import SrganDataset
 from srgan.model import Generator, Discriminator
 from srgan.losses import GenLoss, DiscLoss
-from srgan.utils import read_yaml, create_directories
 from srgan.train import SrganTrainer
+from srgan.utils import read_yaml, create_directories
+
+
+"""
+Training Pipeling Script
+------------------------ 
+This scripts initialises the training parameters 
+and runs the training pipeline
+
+First collects the parameters and confugurations
+from the config.yaml file and initialises models
+Then Srgan Trainer is imported and used to train
+"""
 
 
 def main():
+    """Reading configurations from config.yaml"""
     config = read_yaml("config.yaml")
 
     model_config = config.MODEL
     data_config = config.DATA
-
     create_directories([model_config.ROOT_DIR])
 
     """Dataset parameters"""
@@ -18,6 +30,7 @@ def main():
     crop_size = int(data_config.CROP_SIZE)
     downscale = int(data_config.DOWN_SCALE)
 
+    """Dataset initialisation"""
     dataset = SrganDataset(
         root_dir=dataset_root_dir, crop_size=crop_size, downscale=downscale
     )
@@ -27,17 +40,21 @@ def main():
     scale_factor = int(model_config.SCALE_FACTOR)
     lr = float(model_config.LR)
     model_path = model_config.MODEL_PATH
-    device = model_config.DEVICE
 
+    """Training Parameters"""
+    device = model_config.DEVICE
     batch_size = int(model_config.BATCH_SIZE)
     epochs = int(model_config.EPOCHS)
 
+    """Model inititalisation"""
     gen = Generator(num_blocks=res_block_num, scale_factor=scale_factor)
     disc = Discriminator()
 
+    """Loss initialisation"""
     g_loss = GenLoss()
     d_loss = DiscLoss()
 
+    """Trainer initialisation"""
     model_trainer = SrganTrainer(
         generator=gen,
         generator_loss=g_loss,
@@ -46,7 +63,7 @@ def main():
         path=model_path,
         device=device,
     )
-
+    """Traning"""
     model_trainer.train(dataset=dataset, batch_size=batch_size, epochs=epochs, lr=lr)
 
 

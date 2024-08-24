@@ -1,13 +1,10 @@
 import os
 import yaml
-from pathlib import Path
 from box import ConfigBox
 from srgan import logger
-from ensure import ensure_annotations
 
 
-# @ensure_annotations
-def read_yaml(yaml_path: Path) -> ConfigBox:
+def read_yaml(yaml_path) -> ConfigBox:
     """
     reads the yaml file from the path and
     returns the content as ConfigBox
@@ -27,8 +24,7 @@ def read_yaml(yaml_path: Path) -> ConfigBox:
         raise e
 
 
-# @ensure_annotations
-def create_directories(dir_path: list) -> None:
+def create_directories(dir_path) -> None:
     """
     creates the directories in the given list
 
