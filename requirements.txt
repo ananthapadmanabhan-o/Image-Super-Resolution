@@ -2,8 +2,8 @@ torch
 torchvision
 tqdm
 pillow
-ensure
 python-box
 download
 pandas
+mlflow
 -e .

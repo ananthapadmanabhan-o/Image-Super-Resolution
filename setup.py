@@ -13,6 +13,6 @@ setup(
     author=AUTHOR_NAME,
     author_email=AUTHOR_EMAIL,
     url=f"https://github.com/{AUTHOR_NAME}/{REPO_NAME}",
-    package_dir={"": "."},
-    packages=find_packages(where="."),
+    package_dir={"": ".srgan"},
+    packages=find_packages(where=".srgan"),
 )
