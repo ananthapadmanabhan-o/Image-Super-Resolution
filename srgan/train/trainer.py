@@ -121,12 +121,16 @@ class SrganTrainer:
                 gen_loss.backward()
                 gen_optimizer.step()
 
-            G_Loss.append(gen_loss.item())
-            D_Loss.append(disc_loss.item())
+
+            g_loss = gen_loss.item()
+            d_loss = disc_loss.item()
+
+            G_Loss.append(g_loss)
+            D_Loss.append(d_loss)
 
             if epoch % 1 == 0:
                 print(
-                    f"Epoch [{epoch}/{epochs}], Step [{bch_idx}/{len(train_dataloader)}], D Loss: {disc_loss.item():.4f}, G Loss: {gen_loss.item():.4f}"
+                    f"Epoch [{epoch}/{epochs}], Step [{bch_idx}/{len(train_dataloader)}], D Loss: {d_loss:.4f}, G Loss: {g_loss:.4f}"
                 )
 
         torch.save(self.generator, self.path)
