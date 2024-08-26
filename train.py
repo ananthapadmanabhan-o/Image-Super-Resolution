@@ -3,7 +3,7 @@ from srgan.model import Generator, Discriminator
 from srgan.losses import GenLoss, DiscLoss
 from srgan.train import SrganTrainer
 from srgan.utils import read_yaml, create_directories
-
+import mlflow
 
 """
 Training Pipeling Script
@@ -15,6 +15,12 @@ First collects the parameters and confugurations
 from the config.yaml file and initialises models
 Then Srgan Trainer is imported and used to train
 """
+
+
+mlflow_uri = "http://127.0.0.1:8080"
+
+mlflow.set_registry_uri(mlflow_uri)
+mlflow.set_experiment(experiment_name='SRGAN')
 
 
 def main():
@@ -66,8 +72,9 @@ def main():
         device=device,
     )
     """Traning"""
-    model_trainer.train(dataset=dataset, batch_size=batch_size, epochs=epochs, lr=lr)
+    with mlflow.start_run() as run:
+        model_trainer.train(dataset=dataset, batch_size=batch_size, epochs=epochs, lr=lr)
 
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()

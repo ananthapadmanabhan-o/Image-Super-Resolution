@@ -50,6 +50,9 @@ class SrganTrainer:
         self.generator_loss = generator_loss.to(self.device)
         self.discriminator_loss = discriminator_loss.to(self.device)
         self.path = path
+        self.model_name = (
+            f"srgan{self.generator.num_blocks}_{self.generator.scale_factor}x.pth"
+        )
 
     def train(self, dataset, batch_size, epochs, lr):
         """
@@ -72,11 +75,17 @@ class SrganTrainer:
         losses on each epoch are tracked and saved in csv format in logs dir.
         """
 
-        gen_optimizer = Adam(self.generator.parameters(), lr=lr)
-        disc_optimizer = Adam(self.generator.parameters(), lr=lr)
+        self.dataset = dataset
+        self.batch_size = batch_size
+        self.epochs = epochs
+        self.lr = lr
+
+
+        gen_optimizer = Adam(self.generator.parameters(), lr=self.lr)
+        disc_optimizer = Adam(self.generator.parameters(), lr=self.lr)
 
         train_dataloader = DataLoader(
-            dataset=dataset, batch_size=batch_size, num_workers=2, shuffle=True
+            dataset=self.dataset, batch_size=self.batch_size, num_workers=2, shuffle=True
         )
 
         G_Loss = []
@@ -86,6 +95,8 @@ class SrganTrainer:
         logger.info(f"Training started on {self.device}")
 
         for epoch in range(1, epochs + 1):
+            self.generator.train()
+            self.discriminator.train()
             for bch_idx, (lr_img, hr_img) in enumerate(tqdm(train_dataloader), start=1):
 
                 lr_img = lr_img.to(self.device)
@@ -136,12 +147,8 @@ class SrganTrainer:
                       D Loss: {d_loss:.4f}, G Loss: {g_loss:.4f}"
                 )
 
-        model_name = (
-            f"srgan{self.generator.num_blocks}_{self.generator.scale_factor}x.pth"
-        )
+        torch.save(self.generator, os.path.join(self.path, self.model_name))
 
-        torch.save(self.generator, os.path.join(self.path, model_name))
-        Loss_dataframe = pd.DataFrame(
-            {"Epoch": Epoch_Num, "G_Loss": G_Loss, "D_Loss": D_Loss}
-        )
+        self.Loss_log = {"Epoch": Epoch_Num, "G_Loss": G_Loss, "D_Loss": D_Loss}
+        Loss_dataframe = pd.DataFrame(self.Loss_log)
         Loss_dataframe.to_csv("logs/model_log.csv")
