@@ -1,3 +1,4 @@
+import os
 import torch
 from torch import ones_like, zeros_like
 from torch.utils.data import DataLoader
@@ -80,6 +81,7 @@ class SrganTrainer:
 
         G_Loss = []
         D_Loss = []
+        Epoch_Num = []
 
         logger.info(f"Training started on {self.device}")
 
@@ -121,20 +123,25 @@ class SrganTrainer:
                 gen_loss.backward()
                 gen_optimizer.step()
 
-
             g_loss = gen_loss.item()
             d_loss = disc_loss.item()
 
             G_Loss.append(g_loss)
             D_Loss.append(d_loss)
+            Epoch_Num.append(epoch)
 
             if epoch % 1 == 0:
                 print(
-                    f"Epoch [{epoch}/{epochs}], Step [{bch_idx}/{len(train_dataloader)}], D Loss: {d_loss:.4f}, G Loss: {g_loss:.4f}"
+                    f"Epoch [{epoch}/{epochs}], Step [{bch_idx}/{len(train_dataloader)}], \
+                      D Loss: {d_loss:.4f}, G Loss: {g_loss:.4f}"
                 )
 
-        torch.save(self.generator, self.path)
+        model_name = (
+            f"srgan{self.generator.num_blocks}_{self.generator.scale_factor}x.pth"
+        )
+
+        torch.save(self.generator, os.path.join(self.path, model_name))
         Loss_dataframe = pd.DataFrame(
-            {"epoch": epoch, "G_Loss": G_Loss, "D_Loss": D_Loss}
+            {"Epoch": Epoch_Num, "G_Loss": G_Loss, "D_Loss": D_Loss}
         )
         Loss_dataframe.to_csv("logs/model_log.csv")

@@ -23,7 +23,9 @@ def main():
 
     model_config = config.MODEL
     data_config = config.DATA
-    create_directories([model_config.ROOT_DIR])
+
+    model_path = model_config.ROOT_DIR
+    create_directories([model_path])
 
     """Dataset parameters"""
     dataset_root_dir = data_config.TRAIN_SOURCE_DIR
@@ -39,7 +41,7 @@ def main():
     res_block_num = int(model_config.NUM_BLOCKS)
     scale_factor = int(model_config.SCALE_FACTOR)
     lr = float(model_config.LR)
-    model_path = model_config.MODEL_PATH
+    
 
     """Training Parameters"""
     device = model_config.DEVICE
