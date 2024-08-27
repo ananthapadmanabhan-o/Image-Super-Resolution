@@ -93,10 +93,11 @@ class SrganTrainer:
         Epoch_Num = []
 
         logger.info(f"Training started on {self.device}")
+        self.generator.train()
+        self.discriminator.train()
 
         for epoch in range(1, epochs + 1):
-            self.generator.train()
-            self.discriminator.train()
+            
             for bch_idx, (lr_img, hr_img) in enumerate(tqdm(train_dataloader), start=1):
 
                 lr_img = lr_img.to(self.device)
@@ -134,17 +135,17 @@ class SrganTrainer:
                 gen_loss.backward()
                 gen_optimizer.step()
 
-            g_loss = gen_loss.item()
-            d_loss = disc_loss.item()
+            self.g_loss_percent = gen_loss.item()
+            self.d_loss_percent = disc_loss.item()
 
-            G_Loss.append(g_loss)
-            D_Loss.append(d_loss)
+            G_Loss.append(self.g_loss_percent)
+            D_Loss.append(self.d_loss_percent)
             Epoch_Num.append(epoch)
 
             if epoch % 1 == 0:
                 print(
                     f"Epoch [{epoch}/{epochs}], Step [{bch_idx}/{len(train_dataloader)}], \
-                      D Loss: {d_loss:.4f}, G Loss: {g_loss:.4f}"
+                      G Loss: {self.g_loss_percent:.4f} | D Loss: {self.d_loss_percent:.4f}"
                 )
 
         torch.save(self.generator, os.path.join(self.path, self.model_name))
@@ -152,3 +153,5 @@ class SrganTrainer:
         self.Loss_log = {"Epoch": Epoch_Num, "G_Loss": G_Loss, "D_Loss": D_Loss}
         Loss_dataframe = pd.DataFrame(self.Loss_log)
         Loss_dataframe.to_csv("logs/model_log.csv")
+
+        return self.generator

@@ -4,6 +4,7 @@ from srgan.losses import GenLoss, DiscLoss
 from srgan.train import SrganTrainer
 from srgan.utils import read_yaml, create_directories
 import mlflow
+from datetime import datetime
 
 """
 Training Pipeling Script
@@ -21,6 +22,7 @@ mlflow_uri = "http://127.0.0.1:8080"
 
 mlflow.set_registry_uri(mlflow_uri)
 mlflow.set_experiment(experiment_name='SRGAN')
+print('Mlflow Integration Initialized......')
 
 
 def main():
@@ -34,7 +36,10 @@ def main():
     create_directories([model_path])
 
     """Dataset parameters"""
-    dataset_root_dir = data_config.TRAIN_SOURCE_DIR
+
+
+    # dataset_root_dir = data_config.TRAIN_SOURCE_DIR 
+    dataset_root_dir = data_config.VALID_SOURCE_DIR
     crop_size = int(data_config.CROP_SIZE)
     downscale = int(data_config.DOWN_SCALE)
 
@@ -72,9 +77,34 @@ def main():
         device=device,
     )
     """Traning"""
-    with mlflow.start_run() as run:
-        model_trainer.train(dataset=dataset, batch_size=batch_size, epochs=epochs, lr=lr)
+    model = model_trainer.train(dataset=dataset, batch_size=batch_size, epochs=epochs, lr=lr)
 
 
-# if __name__ == "__main__":
-#     main()
+    """Mlflow Logging"""
+    model_params = {
+        'Res Block':res_block_num,
+        'LR':lr,
+        'Epochs':epochs,
+        'Batch Size': batch_size
+    }
+
+    model_metrics = {
+        'G Loss':model_trainer.g_loss_percent,
+        'D Loss':model_trainer.d_loss_percent
+    }
+
+    run_name = f'srgan-version-{datetime.now():%Y-%m-%d %H:%M:%S}'
+
+    with mlflow.start_run(run_name=run_name) as run:
+
+        mlflow.log_params(model_params)
+        mlflow.log_metrics(model_metrics)
+        # mlflow.log_artifact(model_trainer.generator)
+        mlflow.pytorch.log_model(
+            model,
+            'models'
+        )
+
+
+if __name__ == "__main__":
+    main()
