@@ -14,10 +14,10 @@ DATA:
   
 MODEL:
   ROOT_DIR: models
-  NUM_BLOCKS: 2
+  NUM_BLOCKS: 1
   SCALE_FACTOR: 2
-  LR: 0.002
+  LR: 0.001
   DEVICE: cuda
   BATCH_SIZE: 3
-  EPOCHS: 5
+  EPOCHS: 10
 
