@@ -34,14 +34,12 @@ class Generator(nn.Module):
             nn.Conv2d(64, 64, 3, 1, 1, bias=False), nn.BatchNorm2d(num_features=64)
         )
 
-        # upsample_blocks = [UpsampleBlock(64,256,2) for _ in range(self.num_upsample_block)]
+        upsample_blocks = [UpsampleBlock(64,128,2) if i==0 else UpsampleBlock(128,128,2) for i in range(self.num_upsample_block)]
 
-        self.upsample_block = nn.Sequential(
-            UpsampleBlock(64, 256, 2), UpsampleBlock(256, 256, 2)
-        )
+        self.upsample_block = nn.Sequential(*upsample_blocks)
 
         self.output_block = nn.Sequential(
-            nn.Conv2d(256, 3, 9, 1, padding=4), nn.Sigmoid()
+            nn.Conv2d(128, 3, 9, 1, padding=4), nn.Sigmoid()
         )
 
     def forward(self, x):

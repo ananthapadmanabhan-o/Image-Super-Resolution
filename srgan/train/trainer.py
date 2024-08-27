@@ -74,6 +74,7 @@ class SrganTrainer:
         model is saved on the model path,
         losses on each epoch are tracked and saved in csv format in logs dir.
         """
+        
 
         self.dataset = dataset
         self.batch_size = batch_size
@@ -142,16 +143,24 @@ class SrganTrainer:
             D_Loss.append(self.d_loss_percent)
             Epoch_Num.append(epoch)
 
+
             if epoch % 1 == 0:
                 print(
                     f"Epoch [{epoch}/{epochs}], Step [{bch_idx}/{len(train_dataloader)}], \
                       G Loss: {self.g_loss_percent:.4f} | D Loss: {self.d_loss_percent:.4f}"
                 )
+            
 
         torch.save(self.generator, os.path.join(self.path, self.model_name))
 
-        self.Loss_log = {"Epoch": Epoch_Num, "G_Loss": G_Loss, "D_Loss": D_Loss}
-        Loss_dataframe = pd.DataFrame(self.Loss_log)
-        Loss_dataframe.to_csv("logs/model_log.csv")
+         
+        self.history = pd.DataFrame({
+            "Epoch": Epoch_Num, 
+            "G_Loss": G_Loss, 
+            "D_Loss": D_Loss
 
-        return self.generator
+        })
+
+        self.history.to_csv("logs/model_log.csv")
+
+        return self.generator, self.history

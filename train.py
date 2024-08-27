@@ -6,6 +6,7 @@ from srgan.utils import read_yaml, create_directories
 import mlflow
 from datetime import datetime
 
+
 """
 Training Pipeling Script
 ------------------------ 
@@ -21,8 +22,6 @@ Then Srgan Trainer is imported and used to train
 mlflow_uri = "http://127.0.0.1:8080"
 
 mlflow.set_registry_uri(mlflow_uri)
-mlflow.set_experiment(experiment_name='SRGAN')
-print('Mlflow Integration Initialized......')
 
 
 def main():
@@ -52,7 +51,9 @@ def main():
     res_block_num = int(model_config.NUM_BLOCKS)
     scale_factor = int(model_config.SCALE_FACTOR)
     lr = float(model_config.LR)
-    
+
+    mlflow.set_experiment(experiment_name=f'SRGAN-{scale_factor}x')
+
 
     """Training Parameters"""
     device = model_config.DEVICE
@@ -77,33 +78,30 @@ def main():
         device=device,
     )
     """Traning"""
-    model = model_trainer.train(dataset=dataset, batch_size=batch_size, epochs=epochs, lr=lr)
+    model, history = model_trainer.train(dataset=dataset, batch_size=batch_size, epochs=epochs, lr=lr)
 
 
     """Mlflow Logging"""
-    model_params = {
-        'Res Block':res_block_num,
-        'LR':lr,
-        'Epochs':epochs,
-        'Batch Size': batch_size
-    }
-
-    model_metrics = {
-        'G Loss':model_trainer.g_loss_percent,
-        'D Loss':model_trainer.d_loss_percent
-    }
-
-    run_name = f'srgan-version-{datetime.now():%Y-%m-%d %H:%M:%S}'
+    run_name = f'srgan-{scale_factor}-version-{datetime.now():%Y-%m-%d %H:%M:%S}'
 
     with mlflow.start_run(run_name=run_name) as run:
+        model_params = {
+            'Res Block':res_block_num,
+            'LR':lr,
+            'Epochs':epochs,
+            'Batch Size': batch_size
+        }
 
         mlflow.log_params(model_params)
-        mlflow.log_metrics(model_metrics)
-        # mlflow.log_artifact(model_trainer.generator)
-        mlflow.pytorch.log_model(
-            model,
-            'models'
-        )
+
+        gloss = history['G_Loss']
+        dloss = history['D_Loss']
+        
+        for i in range(len(history)):
+            mlflow.log_metric('G Loss',gloss.iloc[i],step=i)
+            mlflow.log_metric('D Loss',dloss.iloc[i],step=i)
+
+        mlflow.pytorch.log_model(model,'models')
 
 
 if __name__ == "__main__":
