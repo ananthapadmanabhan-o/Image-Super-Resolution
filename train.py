@@ -5,6 +5,7 @@ from srgan.train import SrganTrainer
 from srgan.utils import read_yaml, create_directories
 import mlflow
 from datetime import datetime
+import dagshub
 
 
 """
@@ -19,13 +20,22 @@ Then Srgan Trainer is imported and used to train
 """
 
 
-mlflow_uri = "http://127.0.0.1:8080"
+# mlflow_uri = "http://127.0.0.1:8080"
+# mlflow.set_registry_uri(mlflow_uri)
 
-mlflow.set_registry_uri(mlflow_uri)
+
+REPO_OWNER = "ananthapadmanabhan-o"
+REPO_NAME = "Image-Super-Resolution"
+
+
+
+
+dagshub.init(repo_owner=REPO_OWNER, repo_name=REPO_NAME, mlflow=True)
 
 
 def main():
     """Reading configurations from config.yaml"""
+
     config = read_yaml("config.yaml")
 
     model_config = config.MODEL
@@ -37,8 +47,9 @@ def main():
     """Dataset parameters"""
 
 
-    # dataset_root_dir = data_config.TRAIN_SOURCE_DIR 
-    dataset_root_dir = data_config.VALID_SOURCE_DIR
+    dataset_root_dir = data_config.TRAIN_SOURCE_DIR 
+    # dataset_root_dir = data_config.VALID_SOURCE_DIR
+
     crop_size = int(data_config.CROP_SIZE)
     downscale = int(data_config.DOWN_SCALE)
 
@@ -52,9 +63,7 @@ def main():
     scale_factor = int(model_config.SCALE_FACTOR)
     lr = float(model_config.LR)
 
-    mlflow.set_experiment(experiment_name=f'SRGAN-{scale_factor}x')
-
-
+    
     """Training Parameters"""
     device = model_config.DEVICE
     batch_size = int(model_config.BATCH_SIZE)
@@ -67,6 +76,14 @@ def main():
     """Loss initialisation"""
     g_loss = GenLoss()
     d_loss = DiscLoss()
+    
+
+    """MlFlow Experiment"""
+    mlflow.set_experiment(experiment_name=f'SRGAN-{scale_factor}x')
+    run_name = f'srgan-{scale_factor}x-version-{datetime.now():%Y-%m-%d %H:%M}'
+
+    mlflow.start_run(run_name=run_name)
+
 
     """Trainer initialisation"""
     model_trainer = SrganTrainer(
@@ -82,26 +99,26 @@ def main():
 
 
     """Mlflow Logging"""
-    run_name = f'srgan-{scale_factor}-version-{datetime.now():%Y-%m-%d %H:%M:%S}'
+    model_params = {
+        'Res Block':res_block_num,
+        'LR':lr,
+        'Epochs':epochs,
+        'Batch Size': batch_size
+    }
 
-    with mlflow.start_run(run_name=run_name) as run:
-        model_params = {
-            'Res Block':res_block_num,
-            'LR':lr,
-            'Epochs':epochs,
-            'Batch Size': batch_size
-        }
+    mlflow.log_params(model_params)
 
-        mlflow.log_params(model_params)
+    gloss = history['G_Loss']
+    dloss = history['D_Loss']
+    
+    for i in range(len(history)):
+        mlflow.log_metric('G Loss',gloss.iloc[i],step=i)
+        mlflow.log_metric('D Loss',dloss.iloc[i],step=i)
 
-        gloss = history['G_Loss']
-        dloss = history['D_Loss']
-        
-        for i in range(len(history)):
-            mlflow.log_metric('G Loss',gloss.iloc[i],step=i)
-            mlflow.log_metric('D Loss',dloss.iloc[i],step=i)
+    mlflow.pytorch.log_model(model,'models')
 
-        mlflow.pytorch.log_model(model,'models')
+
+    mlflow.end_run()
 
 
 if __name__ == "__main__":

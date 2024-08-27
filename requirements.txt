@@ -6,4 +6,5 @@ python-box
 download
 pandas
 mlflow
+dagshub
 -e .
