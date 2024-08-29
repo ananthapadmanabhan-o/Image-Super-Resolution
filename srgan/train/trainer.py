@@ -151,7 +151,7 @@ class SrganTrainer:
                 )
             
 
-        torch.save(self.generator, os.path.join(self.path, self.model_name))
+            torch.save(self.generator, os.path.join(self.path, self.model_name))
 
          
         self.history = pd.DataFrame({
