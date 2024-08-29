@@ -1,0 +1,15 @@
+artifact_uri: file:///home/hp/projects/Image-Super-Resolution/mlruns/542970301289524065/14af3f5a2bdd414a82abf05b1cc774ad/artifacts
+end_time: 1724921513009
+entry_point_name: ''
+experiment_id: '542970301289524065'
+lifecycle_stage: active
+run_id: 14af3f5a2bdd414a82abf05b1cc774ad
+run_name: srgan-2x-version-2024-08-29 14:21
+run_uuid: 14af3f5a2bdd414a82abf05b1cc774ad
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1724921473086
+status: 3
+tags: []
+user_id: hp

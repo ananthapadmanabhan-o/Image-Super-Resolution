@@ -1,8 +1,9 @@
 artifact_uri: file:///home/hp/projects/Image-Super-Resolution/mlruns/542970301289524065/06968e88270d4280a5082f0b3c34f06a/artifacts
+deleted_time: 1724921020152
 end_time: 1724780933199
 entry_point_name: ''
 experiment_id: '542970301289524065'
-lifecycle_stage: active
+lifecycle_stage: deleted
 run_id: 06968e88270d4280a5082f0b3c34f06a
 run_name: srgan-2-version-2024-08-27 23:18:49
 run_uuid: 06968e88270d4280a5082f0b3c34f06a

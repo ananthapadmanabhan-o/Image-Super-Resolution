@@ -5,7 +5,6 @@ from srgan.train import SrganTrainer
 from srgan.utils import read_yaml, create_directories
 import mlflow
 from datetime import datetime
-import dagshub
 
 
 """
@@ -20,17 +19,9 @@ Then Srgan Trainer is imported and used to train
 """
 
 
-# mlflow_uri = "http://127.0.0.1:8080"
-# mlflow.set_registry_uri(mlflow_uri)
 
-
-REPO_OWNER = "ananthapadmanabhan-o"
-REPO_NAME = "Image-Super-Resolution"
-
-
-
-
-dagshub.init(repo_owner=REPO_OWNER, repo_name=REPO_NAME, mlflow=True)
+import dagshub
+dagshub.init(repo_owner='ananthapadmanabhan-o', repo_name='Image-Super-Resolution', mlflow=True)
 
 
 def main():
@@ -47,8 +38,8 @@ def main():
     """Dataset parameters"""
 
 
-    dataset_root_dir = data_config.TRAIN_SOURCE_DIR 
-    # dataset_root_dir = data_config.VALID_SOURCE_DIR
+    # dataset_root_dir = data_config.TRAIN_SOURCE_DIR 
+    dataset_root_dir = data_config.VALID_SOURCE_DIR
 
     crop_size = int(data_config.CROP_SIZE)
     downscale = int(data_config.DOWN_SCALE)
@@ -83,6 +74,9 @@ def main():
     run_name = f'srgan-{scale_factor}x-version-{datetime.now():%Y-%m-%d %H:%M}'
 
     mlflow.start_run(run_name=run_name)
+
+    # mlflow_uri = "http://127.0.0.1:8080"
+    # mlflow.set_tracking_uri(mlflow_uri)
 
 
     """Trainer initialisation"""

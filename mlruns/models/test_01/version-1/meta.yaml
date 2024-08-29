@@ -1,0 +1,14 @@
+aliases: []
+creation_timestamp: 1724921814699
+current_stage: None
+description: ''
+last_updated_timestamp: 1724921814699
+name: test_01
+run_id: 508be7ae56c14ed5889798900a162d99
+run_link: ''
+source: file:///home/hp/projects/Image-Super-Resolution/mlruns/542970301289524065/508be7ae56c14ed5889798900a162d99/artifacts/models
+status: READY
+status_message: null
+storage_location: file:///home/hp/projects/Image-Super-Resolution/mlruns/542970301289524065/508be7ae56c14ed5889798900a162d99/artifacts/models
+user_id: null
+version: 1
