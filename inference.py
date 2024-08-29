@@ -17,7 +17,7 @@ model predicts and saves the output to runs/outputs
 
 def main():
 
-    model_path = "demo-models/model.pth"
+    model_path = "demo-models/model2x-2.pth"
     device = "cuda"
 
     img_dir = os.path.join("runs", "inputs")
