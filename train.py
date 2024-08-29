@@ -38,8 +38,7 @@ def main():
     """Dataset parameters"""
 
 
-    # dataset_root_dir = data_config.TRAIN_SOURCE_DIR 
-    dataset_root_dir = data_config.VALID_SOURCE_DIR
+    dataset_root_dir = data_config.TRAIN_SOURCE_DIR 
 
     crop_size = int(data_config.CROP_SIZE)
     downscale = int(data_config.DOWN_SCALE)
