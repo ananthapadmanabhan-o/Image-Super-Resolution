@@ -108,7 +108,9 @@ def main():
         mlflow.log_metric('G Loss',gloss.iloc[i],step=i)
         mlflow.log_metric('D Loss',dloss.iloc[i],step=i)
 
-    mlflow.pytorch.log_model(model,'models')
+    model_name = f"srgan{res_block_num}_{scale_factor}x.pth"
+
+    mlflow.pytorch.log_model(model.state_disct(),model_name)
 
 
     mlflow.end_run()
