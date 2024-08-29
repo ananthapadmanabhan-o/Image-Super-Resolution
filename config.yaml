@@ -9,15 +9,15 @@ DATA:
   TRAIN_SOURCE_DIR: artifacts/data/DIV2K_train_HR
   VALID_SOURCE_DIR: artifacts/data/DIV2K_valid_HR
   CROP_SIZE: 256
-  DOWN_SCALE: 2
+  DOWN_SCALE: 4
 
   
 MODEL:
   ROOT_DIR: models
-  NUM_BLOCKS: 2
-  SCALE_FACTOR: 2
+  NUM_BLOCKS: 6
+  SCALE_FACTOR: 4
   LR: 0.0001
   DEVICE: cuda
   BATCH_SIZE: 16
-  EPOCHS: 3
+  EPOCHS: 1
 
