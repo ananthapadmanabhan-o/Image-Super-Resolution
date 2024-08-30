@@ -3,10 +3,6 @@
 
 ## Introduction 🚨
 
-
-
-
-
 ![Alt text](assets/srgan_cover.png)
 
 
