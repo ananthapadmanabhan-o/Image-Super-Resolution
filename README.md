@@ -7,7 +7,7 @@ One of the fundamental challenge in signal processing is the presence of noise. 
 
 This project aims at exploring autoencoder architecture for image denoising. AutoEncoder arcitecture is a neural netwoek architecture widely used for denoising and reconstruction of images and video files.
 
-check out [GAN](https://en.wikipedia.org/wiki/Autoencoder)
+check out [Photo-Realistic Single Image Super-Resolution Using a Generative Adversarial Network](https://en.wikipedia.org/wiki/Autoencoder)
 GitHub link [Project-Repo](https://github.com/ananthapadmanabhan-o/Image-Denoising-AutoEncoder)
 
 
@@ -16,7 +16,7 @@ One of the fundamental challenge in signal processing is the presence of noise. 
 
 This project aims at exploring autoencoder architecture for image denoising. AutoEncoder arcitecture is a neural netwoek architecture widely used for denoising and reconstruction of images and video files.
 
-check out [AutoEncoders](https://en.wikipedia.org/wiki/Autoencoder)
+check out [AutoEncoders](https://arxiv.org/abs/1609.04802v5)
 learn more about [Image-Noise](https://en.wikipedia.org/wiki/Image_noise#:~:text=Image%20noise%20is%20random%20variation,of%20an%20ideal%20photon%20detector.)
 GitHub link [Project-Repo](https://github.com/ananthapadmanabhan-o/Image-Denoising-AutoEncoder)
 Data set linke [link](https://www.kaggle.com/datasets/huaiyingu/bsd100)
@@ -65,9 +65,14 @@ pip install -r requirements.txt
 python3 train.py
 ```
 
-
-### For Running Streamlit UI
-#### Run Home.py
+### STEP 07
+#### For Running Streamlit UI
 ```bash 
 streamlit run Home.py
+```
+
+### STEP 08
+#### MlFlow Experiment Tracking
+```bash
+mlflow server --host 127.0.0.1 --port 8080
 ```
