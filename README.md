@@ -15,7 +15,7 @@ Data set linke [link](https://data.vision.ee.ethz.ch/cvl/DIV2K/)
 
 ![Alt text](assets/srgan_block.png)
 
-##### check out the app at [streallit app link](https://image-denoising-autoencoder.streamlit.app/)
+##### check out the app at [streallit app link](https://ananthapadmanabhan-o-image-super-resolution-home-n8en52.streamlit.app/)
 
 
 ## 🚀 Installation and Setup 🔥

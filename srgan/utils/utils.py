@@ -40,13 +40,13 @@ def create_directories(dir_path) -> None:
 
 
 
-def predict(img_path,model_path,device='cpu'):
+def predict(img_path,model_path,):
 
     img = Image.open(img_path)
     img_tensor = pil_to_tensor(img) / 255
-    input_tensor = img_tensor.unsqueeze(0).to(device)
+    input_tensor = img_tensor.unsqueeze(0)
     
-    model = torch.load(model_path).to(device)
+    model = torch.load(model_path,map_location='cpu')
     model.eval()
     with torch.no_grad():
         output_tensor = model(input_tensor)

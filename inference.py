@@ -31,7 +31,7 @@ def main():
     for img_file_name in tqdm(img_files):
         img_path = os.path.join(img_dir, img_file_name)
 
-        out_img = predict(img_path, model_path,)
+        out_img = predict(img_path, model_path)
         output_path = os.path.join(out_dir, img_file_name)
         out_img.save(output_path)
 
