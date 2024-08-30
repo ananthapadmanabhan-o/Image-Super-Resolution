@@ -3,20 +3,21 @@
 
 ## Introduction 🚨
 
-One of the fundamental challenge in signal processing is the presence of noise. Random nature of noise makes it difficult to process the data and distructively affects the quality of data collected. The field of computer vision is growing large with its vast applications accross different fields. Advancements in computer vision demands high quality image data for building robust state of the art models. 
-
-This project aims at exploring autoencoder architecture for image denoising. AutoEncoder arcitecture is a neural netwoek architecture widely used for denoising and reconstruction of images and video files.
 
 
-![Alt text](assets/srgan_block.png)
+
+
+![Alt text](assets/srgan_cover.png)
+
 
 check out [Photo-Realistic Single Image Super-Resolution Using a Generative Adversarial Network](https://arxiv.org/abs/1609.04802v5)
-GitHub link [Project-Repo](https://github.com/ananthapadmanabhan-o/Image-Denoising-AutoEncoder)
+GitHub link [Project-Repo](https://github.com/ananthapadmanabhan-o/Image-Super-Resolution)
 
-check out [AutoEncoders]()
-learn more about [Image-Noise](https://en.wikipedia.org/wiki/Image_noise#:~:text=Image%20noise%20is%20random%20variation,of%20an%20ideal%20photon%20detector.)
-GitHub link [Project-Repo](https://github.com/ananthapadmanabhan-o/Image-Denoising-AutoEncoder)
-Data set linke [link](https://www.kaggle.com/datasets/huaiyingu/bsd100)
+Data set linke [link](https://data.vision.ee.ethz.ch/cvl/DIV2K/)
+
+## SRGAN Architecture
+
+![Alt text](assets/srgan_block.png)
 
 ##### check out the app at [streallit app link](https://image-denoising-autoencoder.streamlit.app/)
 
