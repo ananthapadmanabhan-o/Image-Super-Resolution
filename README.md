@@ -64,12 +64,21 @@ python3 train.py
 ```
 
 ### STEP 07
+#### For batch Inferencing
+- put the images in runs/inputs then run
+```bash 
+python3 inference.py
+```
+- output images are saved in runs/outputs
+
+
+### STEP 08
 #### For Running Streamlit UI
 ```bash 
 streamlit run Home.py
 ```
 
-### STEP 08
+### STEP 09
 #### MlFlow Experiment Tracking
 
 ![Alt text](assets/mlflow.png)
