@@ -67,6 +67,10 @@ streamlit run Home.py
 
 ### STEP 08
 #### MlFlow Experiment Tracking
+
+![Alt text](assets/mlflow.png)
 ```bash
 mlflow server --host 127.0.0.1 --port 8080
 ```
+
+
