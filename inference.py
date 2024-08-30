@@ -27,16 +27,15 @@ def main():
 
     print(f"Model loaded from {model_path}")
 
-    print(torch.cuda.is_available())
 
-    # for img_file_name in tqdm(img_files):
-    #     img_path = os.path.join(img_dir, img_file_name)
+    for img_file_name in tqdm(img_files):
+        img_path = os.path.join(img_dir, img_file_name)
 
-    #     out_img = predict(img_path, model_path,)
-    #     output_path = os.path.join(out_dir, img_file_name)
-    #     out_img.save(output_path)
+        out_img = predict(img_path, model_path,)
+        output_path = os.path.join(out_dir, img_file_name)
+        out_img.save(output_path)
 
-    # print(f"Outputs saved in {out_dir}")
+    print(f"Outputs saved in {out_dir}")
 
 
 if __name__ == "__main__":

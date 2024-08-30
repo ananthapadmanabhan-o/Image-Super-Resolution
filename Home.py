@@ -8,6 +8,7 @@ st.set_page_config(
     initial_sidebar_state="expanded",
 )
 
+
 st.header("Image Super Resolution GAN", divider="rainbow")
 
 
