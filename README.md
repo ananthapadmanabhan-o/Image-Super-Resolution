@@ -13,11 +13,13 @@ This project is an implementation of the paper [Photo-Realistic Single Image Sup
 
 - Data set linke [link](https://data.vision.ee.ethz.ch/cvl/DIV2K/)
 
+## check out the app at [streallit app link](https://ananthapadmanabhan-o-image-super-resolution-home-n8en52.streamlit.app/)
+
+
 ## SRGAN Architecture
 
 ![Alt text](assets/srgan_block.png)
 
-##### check out the app at [streallit app link](https://ananthapadmanabhan-o-image-super-resolution-home-n8en52.streamlit.app/)
 
 
 ## 🚀 Installation and Setup 🔥
