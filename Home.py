@@ -53,6 +53,7 @@ st.image('assets/srgan_block.png')
 
 srgan_body = """
 
+
 SRGAN is an extension of GANs specifically designed for the task of image super-resolution, which involves enhancing the resolution of an image from low resolution (LR) to high resolution (HR). The SRGAN architecture includes the following key components:
 
 - ### Generator (Super-Resolution Network): 
@@ -65,7 +66,28 @@ SRGAN is an extension of GANs specifically designed for the task of image super-
     - In addition to the traditional pixel-wise loss (e.g., mean squared error), SRGAN uses a perceptual loss that measures the difference between high-level features of the generated and real images as extracted by a pre-trained network (usually a VGG network). This helps the generator produce images that are visually more appealing and closer to human perception.
 
 SRGAN is particularly powerful for tasks where image quality and fine details are critical, such as medical imaging, satellite imaging, and digital content creation
+
+
+
+This project is an implementation of the paper [Photo-Realistic Single Image Super-Resolution Using a Generative Adversarial Network](https://arxiv.org/abs/1609.04802v5). The model is implemented in pytorch and mlflow is used for experimentation
+
+- GitHub link [Project-Repo](https://github.com/ananthapadmanabhan-o/Image-Super-Resolution)
+
+- Data set linke [link](https://data.vision.ee.ethz.ch/cvl/DIV2K/)
+
+
 """
 
 
 st.markdown(srgan_body)
+
+
+st.markdown(
+    '''
+### MlFow For Experimentations
+
+MLflow is an open-source platform for managing machine learning lifecycle, model tracking. In this project mlflow is used to track model experimentations and model metrics.
+'''
+)
+st.image('assets/mlflow.png')
+

@@ -21,6 +21,7 @@ if uploaded_img is not None:
         st.image(image=uploaded_img,use_column_width=True)
 
     if st.button('Generate',type='primary'):
-        out_image = predict(uploaded_img,'models/srgan6_4x.pth')
-        with r_box:
-            st.image(out_image,use_column_width=True)
+        with st.spinner(text='Loading'):
+            out_image = predict(uploaded_img,'models/srgan6_4x.pth')
+            with r_box:
+                st.image(out_image,use_column_width=True)

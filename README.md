@@ -5,11 +5,13 @@
 
 ![Alt text](assets/srgan_cover.png)
 
+Super-Resolution Generative Adversarial Network (SRGAN) is a deep learning model that enhances low-resolution images by generating high-resolution versions with greater detail and sharpness. It utilizes a generative adversarial network (GAN) framework, consisting of a generator and a discriminator. The generator creates high-resolution images, while the discriminator attempts to distinguish these generated images from real high-resolution ones. To achieve visually appealing results, SRGAN employs a perceptual loss function, which combines adversarial loss with content loss derived from features of a pre-trained network.
 
-check out [Photo-Realistic Single Image Super-Resolution Using a Generative Adversarial Network](https://arxiv.org/abs/1609.04802v5)
-GitHub link [Project-Repo](https://github.com/ananthapadmanabhan-o/Image-Super-Resolution)
+This project is an implementation of the paper [Photo-Realistic Single Image Super-Resolution Using a Generative Adversarial Network](https://arxiv.org/abs/1609.04802v5). The model is implemented in pytorch and mlflow is used for experimentation
 
-Data set linke [link](https://data.vision.ee.ethz.ch/cvl/DIV2K/)
+- GitHub link [Project-Repo](https://github.com/ananthapadmanabhan-o/Image-Super-Resolution)
+
+- Data set linke [link](https://data.vision.ee.ethz.ch/cvl/DIV2K/)
 
 ## SRGAN Architecture
 
