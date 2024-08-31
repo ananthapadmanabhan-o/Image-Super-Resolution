@@ -58,12 +58,21 @@ pip install -r requirements.txt
 - Model parameters like epochs, batch size etc can be modified in the config.yaml file before training
 
 ### STEP 06
+#### To Download dataset run this command
+```bash
+
+python3 data_ingestion.py
+```
+
+
+### STEP 07
 #### To Train custom model run this command
 ```bash
+
 python3 train.py
 ```
 
-### STEP 07
+### STEP 08
 #### For batch Inferencing
 - put the images in runs/inputs then run
 ```bash 
@@ -72,13 +81,13 @@ python3 inference.py
 - output images are saved in runs/outputs
 
 
-### STEP 08
+### STEP 09
 #### For Running Streamlit UI
 ```bash 
 streamlit run Home.py
 ```
 
-### STEP 09
+### STEP 10
 #### MlFlow Experiment Tracking
 
 ![Alt text](assets/mlflow.png)
